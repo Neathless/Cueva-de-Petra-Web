@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Alta de Inventario - Figuras | Cueva de Petra{% endblock %}
+{% block title %}Alta de Inventario | Cueva de Petra{% endblock %}
 
 {% block content %}
 <div class="container py-4">
@@ -10,28 +10,39 @@
       <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Inicio</a></li>
       <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Administración</a></li>
       <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Inventario</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Alta de Figura</li>
+      <li class="breadcrumb-item active" aria-current="page">Alta de Producto</li>
     </ol>
   </nav>
 
   <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 border-bottom pb-3 mb-4">
     <div>
-      <span class="badge bg-primary-subtle text-primary border border-primary-subtle mb-1">Módulo de Administración</span>
-      <h1 class="h2 fw-bold mb-1">Alta de Inventario: Figuras Coleccionables</h1>
-      <p class="text-body-secondary mb-0">Registra nuevas piezas en el catálogo para control de existencias y venta Clic &amp; Recoger.</p>
+      <div class="d-flex align-items-center gap-2 mb-1">
+        <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Módulo Administrativo</span>
+        <span class="badge bg-danger-subtle text-danger border border-danger-subtle">Restaurante &amp; Tienda</span>
+      </div>
+      <h1 class="h2 fw-bold mb-1">Alta de Inventario de Productos</h1>
+      <p class="text-body-secondary mb-0">Registra productos para el restaurante japonés, figuras, manga, TCG o crea nuevas categorías personalizadas.</p>
     </div>
     <div class="d-flex gap-2">
+      <!-- Botón para abrir modal de nueva categoría -->
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalNuevaCategoria">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-folder-plus me-1" viewBox="0 0 16 16">
+          <path d="m.5 3 .04.87a2 2 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2m5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19q-.362.002-.683.12L1.5 2.98a1 1 0 0 1 1-.98z"/>
+          <path d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5"/>
+        </svg>
+        Crear Categoría
+      </button>
       <a href="#" class="btn btn-outline-secondary">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-1" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
         </svg>
-        Volver al Inventario
+        Inventario
       </a>
       <button type="button" class="btn btn-primary" onclick="document.getElementById('formAltaInventario').requestSubmit()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save me-1" viewBox="0 0 16 16">
-          <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg me-1" viewBox="0 0 16 16">
+          <path d="M12.736 3.97a.75.75 0 0 1 1.048 1.072l-7.25 7.994a.75.75 0 0 1-1.072.016l-3.5-3.5a.75.75 0 1 1 1.072-1.072L5.8 11.205l6.936-7.235z"/>
         </svg>
-        Guardar Figura
+        Guardar Producto
       </button>
     </div>
   </div>
@@ -42,7 +53,7 @@
       <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
     </svg>
     <div>
-      <strong>Atención Administrador:</strong> Completa los datos requeridos (<span class="text-danger">*</span>) para que la figura esté disponible en el catálogo y pueda ser apartada por los clientes mediante el sistema <strong>Clic &amp; Recoger</strong>.
+      <strong>Gestión Multicategoría:</strong> Puedes registrar platillos para el <strong>Menú del Restaurante Japonés</strong> (con control de cocina, ingredientes y alérgenos) o productos de la tienda física (figuras, TCG, cómics). Usa el botón <em>"Crear Categoría"</em> si necesitas una clasificación nueva.
     </div>
   </div>
 
@@ -53,123 +64,156 @@
       <!-- Columna Izquierda: Información de Producto y Precios/Stock -->
       <div class="col-lg-8">
         
-        <!-- Tarjeta 1: Información General del Coleccionable -->
+        <!-- Tarjeta 1: Información General y Categorización -->
         <div class="card shadow-sm border mb-4">
           <div class="card-header bg-body-tertiary py-3">
             <h5 class="card-title mb-0 fw-bold d-flex align-items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-seam text-primary" viewBox="0 0 16 16">
                 <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
               </svg>
-              1. Información General de la Figura
+              1. Identificación y Categoría del Producto
             </h5>
           </div>
           <div class="card-body">
             <div class="row g-3">
-              <!-- Nombre de la figura -->
+              <!-- Nombre del producto -->
               <div class="col-12">
-                <label for="nombreFigura" class="form-label fw-semibold">Nombre Oficial de la Figura <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="nombreFigura" name="nombre" placeholder="Ej. Monkey D. Luffy Gear 5 - King of Artist" required>
-                <div class="form-text">Incluye personaje, versión o variante específica.</div>
+                <label for="nombreProducto" class="form-label fw-semibold">Nombre del Producto o Platillo <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="nombreProducto" name="nombre" placeholder="Ej. Tonkotsu Ramen Especial, Gyozas Doradas, Figura Luffy Gear 5..." required>
+                <div class="form-text">Nombre comercial visible en el menú digital y catálogo.</div>
               </div>
 
-              <!-- Franquicia y Fabricante -->
-              <div class="col-md-6">
-                <label for="franquicia" class="form-label fw-semibold">Franquicia / Serie <span class="text-danger">*</span></label>
-                <select class="form-select" id="franquicia" name="franquicia" required>
-                  <option value="" selected disabled>Seleccionar serie...</option>
-                  <option value="One Piece">One Piece</option>
-                  <option value="Dragon Ball">Dragon Ball</option>
-                  <option value="Naruto">Naruto</option>
-                  <option value="Demon Slayer">Demon Slayer (Kimetsu no Yaiba)</option>
-                  <option value="Jujutsu Kaisen">Jujutsu Kaisen</option>
-                  <option value="Chainsaw Man">Chainsaw Man</option>
-                  <option value="Bleach">Bleach</option>
-                  <option value="Neon Genesis Evangelion">Neon Genesis Evangelion</option>
-                  <option value="Genshin Impact">Genshin Impact</option>
-                  <option value="Warhammer 40K">Warhammer 40K</option>
-                  <option value="Marvel / DC">Marvel / DC</option>
-                  <option value="Star Wars">Star Wars</option>
-                  <option value="Otra">Otra Franquicia</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label for="fabricante" class="form-label fw-semibold">Fabricante / Marca <span class="text-danger">*</span></label>
-                <select class="form-select" id="fabricante" name="fabricante" required>
-                  <option value="" selected disabled>Seleccionar fabricante...</option>
-                  <option value="Bandai Spirits">Bandai Spirits / Banpresto</option>
-                  <option value="Good Smile Company">Good Smile Company</option>
-                  <option value="Kotobukiya">Kotobukiya</option>
-                  <option value="MegaHouse">MegaHouse</option>
-                  <option value="Aniplex">Aniplex</option>
-                  <option value="Max Factory">Max Factory</option>
-                  <option value="Alter">Alter</option>
-                  <option value="Sega">Sega</option>
-                  <option value="Taito">Taito</option>
-                  <option value="Furyu">Furyu</option>
-                  <option value="Funko">Funko Pop!</option>
-                  <option value="Otro">Otro Fabricante</option>
-                </select>
-              </div>
-
-              <!-- Línea y Escala -->
-              <div class="col-md-6">
-                <label for="linea" class="form-label fw-semibold">Línea de Producto / Formato <span class="text-danger">*</span></label>
-                <select class="form-select" id="linea" name="linea" required>
-                  <option value="" selected disabled>Seleccionar línea...</option>
-                  <option value="Scale Figure 1/7">Figura a Escala 1/7</option>
-                  <option value="Scale Figure 1/8">Figura a Escala 1/8</option>
-                  <option value="Scale Figure 1/6">Figura a Escala 1/6</option>
-                  <option value="Nendoroid">Nendoroid (Chibi Articulada)</option>
-                  <option value="Pop Up Parade">Pop Up Parade</option>
-                  <option value="Figuarts ZERO">Figuarts ZERO</option>
-                  <option value="SH Figuarts">S.H. Figuarts (Articulada)</option>
-                  <option value="Prize Figure">Prize Figure (Colección accesible)</option>
-                  <option value="Estatua Resina">Estatua de Resina Premium</option>
-                  <option value="Model Kit Gunpla">Model Kit / Gunpla</option>
-                </select>
-              </div>
-
-              <div class="col-md-3">
-                <label for="escala" class="form-label fw-semibold">Escala</label>
-                <input type="text" class="form-control" id="escala" name="escala" placeholder="Ej. 1/7 o No Scale">
-              </div>
-
-              <div class="col-md-3">
-                <label for="altura" class="form-label fw-semibold">Altura Aprox.</label>
+              <!-- Selector de Categoría Principal y Acción Rápida -->
+              <div class="col-md-7">
+                <label for="categoriaProducto" class="form-label fw-semibold">Categoría Principal <span class="text-danger">*</span></label>
                 <div class="input-group">
-                  <input type="number" class="form-control" id="altura" name="altura" placeholder="23" min="1">
-                  <span class="input-group-text">cm</span>
+                  <select class="form-select" id="categoriaProducto" name="categoria" required>
+                    <option value="" selected disabled>Seleccionar categoría...</option>
+                    <optgroup label="🍱 Módulo de Restaurante &amp; Cafetería (Exclusivo)">
+                      <option value="restaurante_ramen">Restaurante: Ramen &amp; Fideos Japoneses</option>
+                      <option value="restaurante_entradas">Restaurante: Entradas Izakaya (Gyozas, Takoyaki, Rollitos)</option>
+                      <option value="restaurante_especialidades">Restaurante: Donburi, Curry &amp; Especialidades</option>
+                      <option value="restaurante_sushi">Restaurante: Sushi Rolls &amp; Onigiri</option>
+                      <option value="restaurante_postres">Restaurante: Postres Japoneses (Mochis, Taiyaki)</option>
+                      <option value="restaurante_bebidas">Restaurante: Bebidas &amp; Tés Japoneses (Ramune, Calpis, Sencha)</option>
+                    </optgroup>
+                    <optgroup label="🎎 Módulo de Tienda &amp; Coleccionables">
+                      <option value="tienda_figuras">Tienda: Figuras de Colección &amp; Estatuas</option>
+                      <option value="tienda_manga">Tienda: Manga, Cómics &amp; Artbooks</option>
+                      <option value="tienda_tcg">Tienda: Cartas Coleccionables (TCG Pokémon, Yugioh, Magic)</option>
+                      <option value="tienda_juegos">Tienda: Juegos de Mesa &amp; Dados de Rol</option>
+                      <option value="tienda_merch">Tienda: Accesorios, Peluches &amp; Ropa</option>
+                    </optgroup>
+                  </select>
+                  <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#modalNuevaCategoria" title="Crear nueva categoría">
+                    + Nueva
+                  </button>
                 </div>
+                <div class="form-text">Elige la categoría o pulsa "+ Nueva" para crear una categoría personalizada.</div>
               </div>
 
-              <!-- Material y Condición -->
+              <!-- Subcategoría o Tipo -->
+              <div class="col-md-5">
+                <label for="subcategoria" class="form-label fw-semibold">Subcategoría / Etiqueta</label>
+                <input type="text" class="form-control" id="subcategoria" name="subcategoria" placeholder="Ej. Caldo de Cerdo, Frito, Escala 1/7, TCG Sobre...">
+              </div>
+
+              <!-- Código SKU y Código de Barras -->
               <div class="col-md-6">
-                <label for="material" class="form-label fw-semibold">Material de Fabricación</label>
-                <input type="text" class="form-control" id="material" name="material" placeholder="Ej. PVC, ABS, Resina, Metal">
+                <label for="codigoSku" class="form-label fw-semibold">Código SKU / Identificador Único <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <span class="input-group-text">#</span>
+                  <input type="text" class="form-control text-uppercase" id="codigoSku" name="sku" placeholder="RAMEN-TONK-01 o FIG-DBZ-01" required>
+                </div>
+                <div class="form-text">Identificador interno en Cueva de Petra.</div>
               </div>
 
               <div class="col-md-6">
-                <label for="condicion" class="form-label fw-semibold">Condición de la Pieza <span class="text-danger">*</span></label>
-                <select class="form-select" id="condicion" name="condicion" required>
-                  <option value="Nueva Sellada" selected>Nueva / Sellada de Fábrica (MISB)</option>
-                  <option value="Caja Abierta Sellada">Caja Abierta / Blister Sellado (MIB)</option>
-                  <option value="Exhibicion Impecable">Exhibición en Vitrina (Impecable)</option>
-                  <option value="Coleccion Previa">Segunda Mano / Excelente Estado</option>
-                </select>
+                <label for="codigoBarras" class="form-label fw-semibold">Código de Barras (Opcional)</label>
+                <input type="text" class="form-control" id="codigoBarras" name="codigo_barras" placeholder="Para productos sellados con EAN/UPC">
               </div>
 
               <!-- Descripción -->
               <div class="col-12">
-                <label for="descripcion" class="form-label fw-semibold">Descripción Detallada</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Describe los detalles de esculpido, pintura, base incluida, piezas intercambiables (rostros, manos, efectos de poder) y estado del empaque original..."></textarea>
-                <div class="form-text">Esta descripción se mostrará en la ficha pública del producto en la web.</div>
+                <label for="descripcion" class="form-label fw-semibold">Descripción del Producto o Platillo</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Describe los ingredientes, proceso culinario, materiales, accesorios o características destacadas..."></textarea>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Tarjeta 2: Precios, Inventario y Almacenamiento -->
+        <!-- Tarjeta 2: Atributos Específicos para el Menú del Restaurante Japonés -->
+        <div class="card shadow-sm border mb-4 border-danger-subtle">
+          <div class="card-header bg-danger-subtle text-danger-emphasis py-3 d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0 fw-bold d-flex align-items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+                <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/>
+              </svg>
+              2. Ficha de Cocina (Solo si es Platillo del Restaurante)
+            </h5>
+            <span class="badge bg-danger text-white">Módulo Cocina</span>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="tiempoPreparacion" class="form-label fw-semibold">Tiempo Estimado de Cocina</label>
+                <div class="input-group">
+                  <input type="number" class="form-control" id="tiempoPreparacion" name="tiempo_prep" min="1" placeholder="12">
+                  <span class="input-group-text">minutos</span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="porcionesPlatillo" class="form-label fw-semibold">Porción / Piezas</label>
+                <input type="text" class="form-control" id="porcionesPlatillo" name="porcion" placeholder="Ej. Tazón 650ml, 6 piezas, 4 rollos...">
+              </div>
+
+              <div class="col-md-4">
+                <label for="nivelPicante" class="form-label fw-semibold">Nivel de Picante</label>
+                <select class="form-select" id="nivelPicante" name="picante">
+                  <option value="Sin picante" selected>Sin picante</option>
+                  <option value="Leve">🌶️ Leve (Shichimi)</option>
+                  <option value="Medio">🌶️🌶️ Medio</option>
+                  <option value="Intenso">🌶️🌶️🌶️ Intenso (Rayu / Chile Japonés)</option>
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label for="ingredientes" class="form-label fw-semibold">Ingredientes Principales</label>
+                <input type="text" class="form-control" id="ingredientes" name="ingredientes" placeholder="Ej. Fideos ramen alcalinos, chashu de cerdo, huevo ajitsuke nitamago, alga nori, cebollín...">
+              </div>
+
+              <!-- Alérgenos y Preferencias -->
+              <div class="col-12">
+                <label class="form-label fw-semibold d-block">Alérgenos y Dietas Especiales</label>
+                <div class="d-flex flex-wrap gap-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="alergSoya" name="alergenos" value="Soya">
+                    <label class="form-check-label small" for="alergSoya">Contiene Soya</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="alergGluten" name="alergenos" value="Gluten">
+                    <label class="form-check-label small" for="alergGluten">Contiene Gluten</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="alergMariscos" name="alergenos" value="Mariscos">
+                    <label class="form-check-label small" for="alergMariscos">Contiene Mariscos/Pescado</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="alergHuevo" name="alergenos" value="Huevo">
+                    <label class="form-check-label small" for="alergHuevo">Contiene Huevo</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="aptoVegetariano" name="es_vegetariano" value="1">
+                    <label class="form-check-label small fw-semibold text-success" for="aptoVegetariano">🌱 Apto para Vegetarianos</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Precios, Control de Stock y Almacén -->
         <div class="card shadow-sm border mb-4">
           <div class="card-header bg-body-tertiary py-3">
             <h5 class="card-title mb-0 fw-bold d-flex align-items-center gap-2">
@@ -177,7 +221,7 @@
                 <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z"/>
                 <path d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z"/>
               </svg>
-              2. Precios, Control de Stock y Almacén
+              3. Precios y Control de Existencias
             </h5>
           </div>
           <div class="card-body">
@@ -187,17 +231,16 @@
                 <label for="precioVenta" class="form-label fw-semibold">Precio de Venta <span class="text-danger">*</span></label>
                 <div class="input-group">
                   <span class="input-group-text">$</span>
-                  <input type="number" class="form-control" id="precioVenta" name="precio_venta" step="0.01" min="0" placeholder="1850.00" required>
+                  <input type="number" class="form-control" id="precioVenta" name="precio_venta" step="0.01" min="0" placeholder="150.00" required>
                   <span class="input-group-text">MXN</span>
                 </div>
-                <div class="form-text">Precio público final.</div>
               </div>
 
               <div class="col-md-4">
-                <label for="costoCompra" class="form-label fw-semibold">Costo de Adquisición</label>
+                <label for="costoCompra" class="form-label fw-semibold">Costo de Insumo / Compra</label>
                 <div class="input-group">
                   <span class="input-group-text">$</span>
-                  <input type="number" class="form-control" id="costoCompra" name="costo_compra" step="0.01" min="0" placeholder="1100.00">
+                  <input type="number" class="form-control" id="costoCompra" name="costo_compra" step="0.01" min="0" placeholder="65.00">
                   <span class="input-group-text">MXN</span>
                 </div>
                 <div class="form-text">Solo visible para administradores.</div>
@@ -209,43 +252,25 @@
                   <input type="number" class="form-control" id="descuento" name="descuento" min="0" max="100" placeholder="0">
                   <span class="input-group-text">%</span>
                 </div>
-                <div class="form-text">Opcional (0 para sin oferta).</div>
               </div>
 
               <!-- Existencias y Alertas -->
               <div class="col-md-6">
-                <label for="stockInicial" class="form-label fw-semibold">Existencias Iniciales (Stock) <span class="text-danger">*</span></label>
-                <input type="number" class="form-control" id="stockInicial" name="stock" min="0" placeholder="5" required>
-                <div class="form-text">Número de piezas físicas disponibles en tienda.</div>
+                <label for="stockInicial" class="form-label fw-semibold">Stock / Porciones Disponibles <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="stockInicial" name="stock" min="0" placeholder="25" required>
+                <div class="form-text">Cantidad física o número de porciones preparables hoy.</div>
               </div>
 
               <div class="col-md-6">
-                <label for="stockMinimo" class="form-label fw-semibold">Stock Mínimo de Alerta</label>
-                <input type="number" class="form-control" id="stockMinimo" name="stock_minimo" min="1" value="2">
-                <div class="form-text">Aviso automático cuando el inventario esté bajo.</div>
+                <label for="stockMinimo" class="form-label fw-semibold">Alerta de Stock Mínimo</label>
+                <input type="number" class="form-control" id="stockMinimo" name="stock_minimo" min="1" value="5">
+                <div class="form-text">Aviso automático para reposición de insumos o producto.</div>
               </div>
 
-              <!-- SKU y Códigos -->
-              <div class="col-md-6">
-                <label for="codigoSku" class="form-label fw-semibold">Código SKU / Referencia <span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <span class="input-group-text">#</span>
-                  <input type="text" class="form-control text-uppercase" id="codigoSku" name="sku" placeholder="FIG-OP-LUFFY-001" required>
-                </div>
-                <div class="form-text">Identificador único en Cueva de Petra.</div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="codigoBarras" class="form-label fw-semibold">Código de Barras (EAN / UPC)</label>
-                <input type="text" class="form-control" id="codigoBarras" name="codigo_barras" placeholder="4573102634812">
-                <div class="form-text">Código impreso en la caja japonesa original.</div>
-              </div>
-
-              <!-- Ubicación en tienda -->
+              <!-- Ubicación física -->
               <div class="col-12">
-                <label for="ubicacionFisica" class="form-label fw-semibold">Ubicación en Tienda / Almacén <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="ubicacionFisica" name="ubicacion" placeholder="Ej. Pasillo A - Vitrina Central - Nivel 2 (Estante Anime Shonen)" required>
-                <div class="form-text">Permite al personal ubicar el producto rápidamente para entregar en Clic &amp; Recoger.</div>
+                <label for="ubicacionFisica" class="form-label fw-semibold">Ubicación en Local / Almacén</label>
+                <input type="text" class="form-control" id="ubicacionFisica" name="ubicacion" placeholder="Ej. Cocina Principal / Refrigerador 2 o Vitrina Anime Pasillo B">
               </div>
             </div>
           </div>
@@ -253,10 +278,10 @@
 
       </div>
 
-      <!-- Columna Derecha: Multimedia, Visibilidad y Acciones -->
+      <!-- Columna Derecha: Multimedia, Publicación y Guardado -->
       <div class="col-lg-4">
         
-        <!-- Tarjeta 3: Imagen y Galería -->
+        <!-- Tarjeta 4: Fotografía del Producto -->
         <div class="card shadow-sm border mb-4">
           <div class="card-header bg-body-tertiary py-3">
             <h5 class="card-title mb-0 fw-bold d-flex align-items-center gap-2">
@@ -264,18 +289,18 @@
                 <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                 <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
               </svg>
-              3. Imagen de la Figura
+              4. Imagen o Foto
             </h5>
           </div>
           <div class="card-body">
-            <!-- Contenedor de Vista Previa -->
+            <!-- Vista Previa -->
             <div class="border border-2 border-secondary-subtle rounded-3 p-4 text-center bg-body-tertiary mb-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-camera text-secondary mb-2" viewBox="0 0 16 16">
                 <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 7.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 13.828 5H15a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/>
                 <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
               </svg>
-              <div class="text-body-secondary small">Vista previa de la fotografía principal</div>
-              <span class="badge text-bg-light border mt-2">Relación recomendada 1:1</span>
+              <div class="text-body-secondary small">Vista previa de imagen</div>
+              <span class="badge text-bg-light border mt-2">Relación 1:1 o 4:3</span>
             </div>
 
             <div class="mb-3">
@@ -286,20 +311,19 @@
 
             <div class="mb-2">
               <label for="imagenUrl" class="form-label fw-semibold">O URL de Imagen Externa</label>
-              <input type="url" class="form-control" id="imagenUrl" name="imagen_url" placeholder="https://ejemplo.com/figura.jpg">
-              <div class="form-text">Enlace directo a fotografía en alta resolución.</div>
+              <input type="url" class="form-control" id="imagenUrl" name="imagen_url" placeholder="https://ejemplo.com/ramen.jpg">
             </div>
           </div>
         </div>
 
-        <!-- Tarjeta 4: Configuración de Venta y Clic & Recoger -->
+        <!-- Tarjeta 5: Configuración de Publicación y Clic & Recoger -->
         <div class="card shadow-sm border mb-4">
           <div class="card-header bg-body-tertiary py-3">
             <h5 class="card-title mb-0 fw-bold d-flex align-items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-sliders text-warning" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
               </svg>
-              4. Opciones de Publicación
+              5. Opciones de Venta
             </h5>
           </div>
           <div class="card-body">
@@ -309,59 +333,45 @@
               <label class="form-check-label fw-semibold" for="habilitarClicRecoger">
                 Habilitar Clic &amp; Recoger
               </label>
-              <div class="text-body-secondary small">Permite apartar la figura vía web para pagar y retirar en tienda.</div>
+              <div class="text-body-secondary small">Permite a los comensales ordenar desde su móvil para recoger en barra o mesa.</div>
             </div>
 
-            <!-- Switch Catálogo Público -->
+            <!-- Switch Menú Digital / Catálogo Público -->
             <div class="form-check form-switch mb-3">
               <input class="form-check-input" type="checkbox" role="switch" id="publicarCatalogo" name="publicar_catalogo" checked>
               <label class="form-check-label fw-semibold" for="publicarCatalogo">
-                Visible en Catálogo Público
+                Visible en Menú Digital / Web
               </label>
-              <div class="text-body-secondary small">Si se desactiva, queda oculta para revisión interna.</div>
             </div>
 
             <!-- Switch Destacar -->
             <div class="form-check form-switch mb-3">
               <input class="form-check-input" type="checkbox" role="switch" id="destacar" name="destacar">
               <label class="form-check-label fw-semibold" for="destacar">
-                Destacar en Portada
+                Platillo / Producto Destacado
               </label>
-              <div class="text-body-secondary small">Aparece en el carrusel de novedades principales.</div>
+              <div class="text-body-secondary small">Aparece en sección especial con medalla de recomendación.</div>
             </div>
 
-            <!-- Switch Exclusivo -->
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" role="switch" id="edicionLimitada" name="edicion_limitada">
-              <label class="form-check-label fw-semibold" for="edicionLimitada">
-                Edición Limitada / Exclusiva
-              </label>
-              <div class="text-body-secondary small">Agrega etiqueta dorada de exclusividad en la tienda.</div>
-            </div>
-
-            <!-- Preventa -->
+            <!-- Switch Exclusivo Restaurante -->
             <div class="form-check form-switch mb-2">
-              <input class="form-check-input" type="checkbox" role="switch" id="esPreventa" name="es_preventa">
-              <label class="form-check-label fw-semibold" for="esPreventa">
-                Es Preventa (Pre-orden)
+              <input class="form-check-input" type="checkbox" role="switch" id="exclusivoRestaurante" name="exclusivo_restaurante" checked>
+              <label class="form-check-label fw-semibold" for="exclusivoRestaurante">
+                Asignar al Menú del Restaurante
               </label>
-            </div>
-
-            <div class="mb-2">
-              <label for="fechaLlegada" class="form-label small text-body-secondary">Fecha Estimada de Llegada (Preventa):</label>
-              <input type="date" class="form-control form-control-sm" id="fechaLlegada" name="fecha_llegada">
+              <div class="text-body-secondary small">Sincroniza directamente con la cocina y comanda de Cueva de Petra.</div>
             </div>
           </div>
         </div>
 
-        <!-- Tarjeta 5: Acciones de Guardado -->
+        <!-- Tarjeta 6: Acciones de Guardado -->
         <div class="card shadow-sm border">
           <div class="card-header bg-body-tertiary py-3">
             <h5 class="card-title mb-0 fw-bold d-flex align-items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-send text-primary" viewBox="0 0 16 16">
                 <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
               </svg>
-              5. Guardar Registro
+              6. Guardar Registro
             </h5>
           </div>
           <div class="card-body">
@@ -370,10 +380,10 @@
                 <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
                 <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
               </svg>
-              Registrar Figura
+              Guardar en Inventario
             </button>
             <button type="button" class="btn btn-outline-primary w-100 mb-2">
-              Guardar y Registrar Otra
+              Guardar y Registrar Otro
             </button>
             <button type="reset" class="btn btn-outline-secondary w-100 mb-3">
               Limpiar Campos
@@ -384,7 +394,7 @@
           </div>
           <div class="card-footer bg-body-tertiary text-center py-2">
             <small class="text-body-secondary">
-              Registro auditado por Cueva de Petra v1.0
+              Sistema Clic &amp; Recoger - Cueva de Petra v1.0
             </small>
           </div>
         </div>
@@ -392,5 +402,68 @@
       </div>
     </div>
   </form>
+</div>
+
+<!-- MODAL NATIVO DE BOOTSTRAP 5: CREAR NUEVA CATEGORÍA -->
+<div class="modal fade" id="modalNuevaCategoria" tabindex="-1" aria-labelledby="modalNuevaCategoriaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border shadow">
+      <div class="modal-header bg-body-tertiary">
+        <h5 class="modal-title fw-bold d-flex align-items-center gap-2" id="modalNuevaCategoriaLabel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder-plus text-success" viewBox="0 0 16 16">
+            <path d="m.5 3 .04.87a2 2 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2m5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19q-.362.002-.683.12L1.5 2.98a1 1 0 0 1 1-.98z"/>
+            <path d="M13.5 9a.5.5 0 0 1 .5.5V11h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V12h-1.5a.5.5 0 0 1 0-1H13V9.5a.5.5 0 0 1 .5-.5"/>
+          </svg>
+          Crear Nueva Categoría
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-body-secondary small mb-3">
+          Define una nueva categoría para organizar productos en el inventario o agrégala de forma exclusiva al menú del restaurante.
+        </p>
+        
+        <div class="mb-3">
+          <label for="nombreNuevaCategoria" class="form-label fw-semibold">Nombre de la Categoría <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="nombreNuevaCategoria" placeholder="Ej. Ramen Premium, Tempura, Tostadas Japonesas...">
+        </div>
+
+        <div class="mb-3">
+          <label for="tipoModuloCategoria" class="form-label fw-semibold">Módulo de Asignación <span class="text-danger">*</span></label>
+          <select class="form-select" id="tipoModuloCategoria">
+            <option value="restaurante" selected>🍱 Exclusiva para el Menú del Restaurante Japonés</option>
+            <option value="tienda">🎎 Tienda de Coleccionables &amp; Pasatiempos</option>
+            <option value="mixto">🔄 Mixto (Aplica a ambos módulos)</option>
+          </select>
+          <div class="form-text">Si seleccionas "Restaurante", los productos aparecerán automáticamente en el menú digital.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="iconoCategoria" class="form-label fw-semibold">Emoji / Ícono Identificador</label>
+          <input type="text" class="form-control" id="iconoCategoria" placeholder="Ej. 🍜, 🥟, 🍤, 🎎, 📚...">
+        </div>
+
+        <div class="mb-3">
+          <label for="descNuevaCategoria" class="form-label fw-semibold">Descripción Breve</label>
+          <textarea class="form-control" id="descNuevaCategoria" rows="2" placeholder="Resumen de qué tipo de productos engloba esta categoría..."></textarea>
+        </div>
+
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="categoriaActiva" checked>
+          <label class="form-check-label fw-semibold" for="categoriaActiva">Activar categoría de inmediato</label>
+        </div>
+      </div>
+      <div class="modal-footer bg-body-tertiary">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle me-1" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+          </svg>
+          Guardar Categoría
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
