@@ -1,948 +1,652 @@
 {% extends "layout.html" %}
 
-{% block title %}Menú Digital: Restaurante Japonés &amp; Izakaya | Cueva de Petra{% endblock %}
+{% block title %}Menú de Cafetería Asiática | Cueva de Petra{% endblock %}
 
 {% block content %}
-<div class="container py-4">
+<style>
+  :root {
+    --cp-bg: #FFFFFF;
+    --cp-page-bg: #FAFAFA;
+    --cp-border: #E5E7EB;
+    --cp-border-dark: #111111;
+    --cp-text-main: #111111;
+    --cp-text-muted: #6B7280;
+    --cp-accent: #FACC15;
+    --cp-dark-btn: #18181B;
+    --cp-radius: 8px;
+  }
 
-  <!-- Header / Hero del Restaurante Japonés -->
-  <div class="p-4 p-md-5 mb-5 rounded-4 bg-body-tertiary border shadow-sm">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-8">
-        <div class="d-flex flex-wrap gap-2 mb-2">
-          <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-3 py-2 fs-6">
-            🍜 Auténtica Cocina Japonesa &amp; Izakaya
-          </span>
-          <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 fs-6">
-            Disponible para Clic &amp; Recoger
-          </span>
-        </div>
-        <h1 class="display-5 fw-bold mb-3">Menú Digital: Restaurante Japonés</h1>
-        <p class="lead text-body-secondary mb-4">
-          Tazones de ramen tradicional con caldos cocinados a fuego lento durante 14 horas, aperitivos clásicos de Izakaya (gyozas doradas, takoyaki, rollitos primavera crujientes) y bebidas típicas de Japón para disfrutar mientras juegas en <strong>Cueva de Petra</strong>.
-        </p>
-        <div class="row row-cols-1 row-cols-sm-3 g-2 text-body-secondary small">
-          <div class="col d-flex align-items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clock-history text-danger flex-shrink-0" viewBox="0 0 16 16">
-              <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.474 1.95a7.005 7.005 0 0 0-.063-.513l.988-.162c.078.474.12 1.018.12 1.574h-1c0-.49-.036-.93-.145-1.399zm-.474 1.95a7.08 7.08 0 0 0 .179-.483l.95.313a7.976 7.976 0 0 1-.45 1.088l-.893-.45a7.08 7.08 0 0 0 .214-.468zm-.744 1.352.818.576c-.227.32-.477.625-.747.91l-.724-.69a6.99 6.99 0 0 0 .653-.796zm-1.834 1.79.615.789c-.31.242-.64.462-.979.654l-.493-.87a7.01 7.01 0 0 0 .857-.573zm-2.004.45.36.933a8.04 8.04 0 0 1-1.126.342l-.219-.976a7.003 7.003 0 0 0 .985-.299zM8 15a7 7 0 1 0 0-14 7 7 0 0 0 0 14zm.5-5H8a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v3.5h.5a.5.5 0 0 1 0 1z"/>
-            </svg>
-            <span><strong>Cocina Abierta:</strong> 13:00 - 22:30 hrs</span>
-          </div>
-          <div class="col d-flex align-items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-geo-alt text-primary flex-shrink-0" viewBox="0 0 16 16">
-              <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-              <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-            </svg>
-            <span>Servicio en barra o mesa de juego</span>
-          </div>
-          <div class="col d-flex align-items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check2-all text-success flex-shrink-0" viewBox="0 0 16 16">
-              <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0l7-7zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0z"/>
-              <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708z"/>
-            </svg>
-            <span>Opciones vegetarianas disponibles</span>
-          </div>
-        </div>
-      </div>
+  body {
+    background-color: var(--cp-page-bg);
+    color: var(--cp-text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
 
-      <div class="col-lg-4 text-center">
-        <div class="card border-0 bg-transparent">
-          <div class="card-body p-3">
-            <div class="p-3 bg-danger-subtle border border-danger-subtle rounded-4 text-danger mb-3">
-              <div class="display-6 fw-bold">🍜 + 🥟</div>
-              <div class="fw-semibold mt-1">¡Pide directo a tu mesa!</div>
-              <small class="text-body-secondary">Ordena tu comida japonesa favorita con Clic &amp; Recoger sin interrumpir tu partida.</small>
-            </div>
-            <a href="#combos" class="btn btn-warning fw-bold w-100 py-2 shadow-sm text-dark">
-              Ver Combos Especiales
-            </a>
-          </div>
-        </div>
-      </div>
+  .menu-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    min-height: 100vh;
+    border-left: 1px solid var(--cp-border);
+    border-right: 1px solid var(--cp-border);
+    padding: 1.5rem 2rem 3rem 2rem;
+  }
+
+  /* Top Navigation Bar from Figma */
+  .figma-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--cp-border);
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-logo-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border: 1.5px dashed #9CA3AF;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4B5563;
+    background: #F9FAFB;
+    white-space: nowrap;
+  }
+
+  .nav-search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-grow: 1;
+    max-width: 440px;
+  }
+
+  .nav-search-input {
+    width: 100%;
+    border: 1px solid var(--cp-border);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    outline: none;
+  }
+  .nav-search-input:focus {
+    border-color: #111111;
+  }
+
+  .btn-nav-search {
+    background: #111111;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline-pill {
+    border: 1px solid var(--cp-border);
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 0.38rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #111111;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .btn-outline-pill:hover {
+    background: #F3F4F6;
+  }
+
+  /* Hero Card */
+  .menu-hero-card {
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    background: #FAFAFA;
+    margin-bottom: 2rem;
+  }
+
+  .menu-hero-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    color: var(--cp-text-main);
+  }
+
+  .menu-hero-sub {
+    font-size: 0.875rem;
+    color: var(--cp-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Quick Category Tabs */
+  .category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cp-border);
+  }
+
+  .tab-pill {
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid var(--cp-border);
+    background: #FFFFFF;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4B5563;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .tab-pill:hover, .tab-pill.active {
+    background: #111111;
+    color: #FFFFFF;
+    border-color: #111111;
+  }
+
+  /* Section Styling */
+  .menu-section {
+    margin-bottom: 2.25rem;
+  }
+
+  .section-header-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1.5px solid #111111;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .section-count-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6B7280;
+    border: 1px solid var(--cp-border);
+    padding: 0.15rem 0.55rem;
+    border-radius: 9999px;
+    background: #F9FAFB;
+  }
+
+  /* Menu Items with Dotted Leader Lines */
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .menu-item-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .item-thumb-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    border: 1px solid var(--cp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #9CA3AF;
+    flex-shrink: 0;
+  }
+
+  .item-info {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .item-title-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .item-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--cp-text-main);
+    white-space: nowrap;
+  }
+
+  .item-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #D1D5DB;
+    height: 1px;
+    margin: 0 0.4rem;
+  }
+
+  .item-price {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--cp-text-main);
+    white-space: nowrap;
+  }
+
+  .item-desc {
+    font-size: 0.78rem;
+    color: var(--cp-text-muted);
+    margin-top: 0.15rem;
+    line-height: 1.4;
+  }
+
+  /* Combos Card Grid */
+  .combos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .combo-box {
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    padding: 1.25rem;
+    background: #FFFFFF;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .combo-box:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .combo-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .combo-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .combo-price {
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+
+  .combo-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0 0;
+    font-size: 0.8rem;
+    color: #4B5563;
+  }
+  .combo-items-list li {
+    padding: 0.2rem 0;
+  }
+
+  /* Footer Note */
+  .menu-footer {
+    border-top: 1px solid var(--cp-border);
+    padding-top: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--cp-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .menu-footer strong {
+    color: var(--cp-text-main);
+  }
+</style>
+
+<div class="menu-wrapper">
+  
+  <!-- 1. Top Navbar from Figma -->
+  <header class="figma-navbar">
+    <div class="nav-logo-box">
+      [ LOGO TIENDA ]
     </div>
-  </div>
-
-  <!-- Píldoras de Navegación por Categorías Japonesas -->
-  <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
-    <a href="#ramen" class="btn btn-outline-danger rounded-pill px-3 py-2 fw-semibold">
-      🍜 Ramen &amp; Fideos
-    </a>
-    <a href="#izakaya" class="btn btn-outline-danger rounded-pill px-3 py-2 fw-semibold">
-      🥟 Entradas &amp; Izakaya
-    </a>
-    <a href="#donburi" class="btn btn-outline-danger rounded-pill px-3 py-2 fw-semibold">
-      🍱 Donburi &amp; Curry
-    </a>
-    <a href="#postres" class="btn btn-outline-danger rounded-pill px-3 py-2 fw-semibold">
-      🍡 Postres Japoneses
-    </a>
-    <a href="#bebidas" class="btn btn-outline-danger rounded-pill px-3 py-2 fw-semibold">
-      🍵 Bebidas &amp; Tés
-    </a>
-    <a href="#combos" class="btn btn-outline-warning rounded-pill px-3 py-2 fw-semibold">
-      ⭐ Combos &amp; Bento Boxes
-    </a>
-  </div>
-
-  <!-- SECCIÓN 1: RAMEN Y FIDEOS JAPONESES -->
-  <section id="ramen" class="mb-5 pt-3">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-4">
-      <div>
-        <span class="badge bg-danger-subtle text-danger border border-danger-subtle mb-1">Caldos de 14 Horas</span>
-        <h2 class="h3 fw-bold mb-0">🍜 Ramen &amp; Fideos Tradicionales</h2>
-      </div>
-      <span class="badge text-bg-secondary">5 Variedades</span>
+    
+    <div class="nav-search-box">
+      <input type="text" class="nav-search-input" placeholder="Buscar bebidas, snacks o ramen...">
+      <button type="button" class="btn-nav-search">Buscar</button>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="nav-actions">
+      <button class="btn-outline-pill">
+        🛒 Carrito <span class="badge bg-dark text-white rounded-pill ms-1">2</span>
+      </button>
+      <button class="btn-outline-pill">
+        Cerrar Sesión
+      </button>
+    </div>
+  </header>
+
+  <!-- 2. Hero Frame from Figma -->
+  <section class="menu-hero-card">
+    <h1 class="menu-hero-title">Menú de Cafetería Asiática</h1>
+    <p class="menu-hero-sub">
+      Selección especial de especialidades, bebidas importadas y gastronomía rápida japonesa y coreana.
+      Pide y recoge en barra o directo a tu mesa de juego.
+    </p>
+  </section>
+
+  <!-- 3. Navigation Categories -->
+  <nav class="category-tabs">
+    <a href="#bebidas" class="tab-pill active">Bebidas de Importación</a>
+    <a href="#snacks" class="tab-pill">Snacks &amp; Botanas</a>
+    <a href="#ramen" class="tab-pill">Ramen &amp; Fideos</a>
+    <a href="#izakaya" class="tab-pill">Entradas Izakaya</a>
+    <a href="#combos" class="tab-pill">Combos Especiales</a>
+  </nav>
+
+  <!-- ============================================== -->
+  <!-- SECCIÓN 1: BEBIDAS DE IMPORTACIÓN (Figma)     -->
+  <!-- ============================================== -->
+  <section id="bebidas" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">BEBIDAS DE IMPORTACIÓN</h2>
+      <span class="section-count-badge">5 productos</span>
+    </div>
+
+    <div class="items-list">
       
-      <!-- Ramen 1: Tonkotsu -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">Especialidad de la Casa</span>
-            <span class="badge text-bg-light border">Caldo Cremoso</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Ramune Original Japonés</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$65.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Tonkotsu Ramen Especial</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$165.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Caldo denso y sedoso de huesos de cerdo cocinado a fuego lento durante 14 horas, fideos artesanales alcalinos firmes, 2 piezas de Chashu tierno braseado al soplete, huevo marinado Ajitsuke Nitamago, menma (bambú), alga nori y cebollín fresco.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Tazón 750ml</span>
-              <span class="badge text-bg-light border small">Chashu de Cerdo</span>
-              <span class="badge text-bg-light border small">Nitamago entero</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 12-15 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Refresco carbonatado con canica tradicional 200ml (Limón-Lima, Fresa, Melón).</div>
         </div>
       </div>
 
-      <!-- Ramen 2: Spicy Tantanmen -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">🌶️🌶️ Picante Delicioso</span>
-            <span class="badge text-bg-light border">Sésamo &amp; Chile</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Té Verde Matcha Latte Frío</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$70.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Spicy Tantanmen Ramen</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$170.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Caldo enriquecido con pasta de sésamo tostado japonés y aceite de chile Rayu artesanal, coronado con carne de cerdo molida salteada al wok con miso dulce, bok choy fresco, brotes de soya y huevo marinado.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Picante medio</span>
-              <span class="badge text-bg-light border small">Pasta de Sésamo</span>
-              <span class="badge text-bg-light border small">Bok Choy</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 12 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Batido artesanal de té con leche vegetal 350ml.</div>
         </div>
       </div>
 
-      <!-- Ramen 3: Miso Ramen -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">Sabor Hokkaido</span>
-            <span class="badge text-bg-light border">Reconfortante</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Calpis Soda de Uva</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$75.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Miso Ramen Tradicional</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$155.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Fusión de pasta de miso rojo y blanco fermentado en caldo de pollo y cerdo, maíz dulce dorado a la mantequilla japonesa, Chashu braseado, brotes tiernos, alga nori y ajonjolí negro tostado.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Miso fermentado</span>
-              <span class="badge text-bg-light border small">Elote mantequilla</span>
-              <span class="badge text-bg-light border small">Fideos ondulados</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 10-12 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Bebida láctea fermentada refrescante 350ml.</div>
         </div>
       </div>
 
-      <!-- Ramen 4: Shoyu Ramen -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Clásico de Tokio</span>
-            <span class="badge text-bg-light border">Caldo Claro</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Milkis Coreano Clásico</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$55.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Tokyo Shoyu Ramen</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$145.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Caldo claro de ave con tare de salsa de soya añejada, katsuobushi y alga kombu. Servido con fideos finos, Chashu de cerdo, narutomaki (pasta de pescado espiral), bambú menma y cebollín.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Salsa Shoyu añeja</span>
-              <span class="badge text-bg-light border small">Narutomaki</span>
-              <span class="badge text-bg-light border small">Ligero &amp; Aromático</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 10 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Refresco carbonatado con yogur y dulce 250ml.</div>
         </div>
       </div>
 
-      <!-- Ramen 5: Veggie Miso Ramen -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-success text-white">🌱 100% Vegetariano</span>
-            <span class="badge text-bg-light border">Tofu &amp; Shiitake</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Cerveza Asahi Super Dry</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$85.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Veggie Shiitake Ramen</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$150.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Fondo umami elaborado con hongos shiitake secos, alga kombu y vegetales de temporada con pasta de miso blanco. Acompañado de tofu frito dorado, bok choy, champiñones salteados y aceite de sésamo.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Caldo de Shiitake</span>
-              <span class="badge text-bg-light border small">Tofu crujiente</span>
-              <span class="badge text-bg-light border small">Vegetariano</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 12 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Lager japonesa tradicional Karakuchi 330ml (+18 años).</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SECCIÓN 2: ENTRADAS E IZAKAYA (GYOZAS, TAKOYAKI, ROLLITOS, ETC.) -->
-  <section id="izakaya" class="mb-5 pt-3">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-4">
-      <div>
-        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle mb-1">Aperitivos Clásicos</span>
-        <h2 class="h3 fw-bold mb-0">🥟 Entradas &amp; Izakaya</h2>
-      </div>
-      <span class="badge text-bg-secondary">6 Opciones</span>
+  <!-- ============================================== -->
+  <!-- SECCIÓN 2: SNACKS (Figma)                     -->
+  <!-- ============================================== -->
+  <section id="snacks" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">SNACKS</h2>
+      <span class="section-count-badge">4 productos</span>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="items-list">
       
-      <!-- Entrada 1: Gyozas Doradas -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">⭐ Las Más Pedidas</span>
-            <span class="badge text-bg-light border">6 Piezas</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Pocky Chocolate &amp; Almondres</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$45.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Gyozas Japonesas Doradas</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$95.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Empanaditas japonesas artesanales rellenas de cerdo picado sazonado con jengibre fresco, col china, ajo y cebollín. Doradas a la plancha por debajo con costra crujiente y cocidas al vapor por arriba. Servidas con salsa ponzu-soya y aceite de sésamo.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">6 piezas</span>
-              <span class="badge text-bg-light border small">Costra crujiente</span>
-              <span class="badge text-bg-light border small">Dip Ponzu incluido</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 8 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Varitas de galleta bañadas en chocolate con trozos de almendra crujiente 45g.</div>
         </div>
       </div>
 
-      <!-- Entrada 2: Takoyaki -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-primary text-white">Clásico de Osaka</span>
-            <span class="badge text-bg-light border">6 Piezas</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Mochi Tradicional Surtido (3 piezas)</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$90.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Takoyaki Tradicional de Osaka</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$105.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Esferas de masa japonesa horneadas en plancha de hierro fundido con tierno trozo de pulpo en su interior. Bañadas en salsa takoyaki dulce, mayonesa japonesa Kewpie, alga aonori en polvo y copos de bonito ahumado (katsuobushi) danzantes.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">6 esferas con pulpo</span>
-              <span class="badge text-bg-light border small">Katsuobushi danzante</span>
-              <span class="badge text-bg-light border small">Mayonesa Kewpie</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 10 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Frijol rojo (azuki), taro y té verde.</div>
         </div>
       </div>
 
-      <!-- Entrada 3: Rollitos Primavera / Harumaki -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-warning text-dark">Ultra Crujientes</span>
-            <span class="badge text-bg-light border">4 Piezas</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Onigiri Salmón y Furikake</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$60.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Rollitos Primavera (Harumaki)</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$85.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Crujientes rollitos fritos de pasta delgada y dorada rellenos de vegetales salteados (zanahoria, col blanca, setas shiitake y brotes de soya) con carne de res y cerdo marinada en salsa de ostión. Servidos con salsa agridulce casera.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">4 rollos dorados</span>
-              <span class="badge text-bg-light border small">Vegetales &amp; Carne</span>
-              <span class="badge text-bg-light border small">Salsa Agridulce</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 8 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Triángulo de arroz envuelto en alga nori tostada.</div>
         </div>
       </div>
 
-      <!-- Entrada 4: Karaage Pollo Frito Japonés -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">Favorito de Barra</span>
-            <span class="badge text-bg-light border">Porción 200g</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Dorayaki Relleno de Nutella y Fresa</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$70.00</span>
           </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Tori Karaage (Pollo Frito Japonés)</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$110.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Bocados de muslo de pollo marinados en salsa de soya, sake, jengibre y ajo, rebozados en fécula de papa para lograr un exterior súper crujiente e interior muy jugoso. Acompañados con gajo de limón y mayonesa picante Shichimi.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">200g pollo marinado</span>
-              <span class="badge text-bg-light border small">Mayo picante Shichimi</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 10 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Entrada 5: Edamames con Sal de Mar -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-success text-white">🌱 Vegetariano / Saludable</span>
-            <span class="badge text-bg-light border">Vapor</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Edamames al Vapor (Sal o Shichimi)</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$65.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Vainas tiernas de soya cocidas al vapor al momento. Puedes pedirlas clásicas con flor de sal de mar o salteadas al wok con ajo picado, aceite de sésamo y picante Shichimi Togarashi.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Vainas tiernas</span>
-              <span class="badge text-bg-light border small">Opción clásica o con picante</span>
-              <span class="badge text-bg-light border small">Snack ideal</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 5 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Entrada 6: Gyozas Vegetarianas -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-success text-white">🌱 100% Vegetariano</span>
-            <span class="badge text-bg-light border">6 Piezas</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Gyozas Veganas de Setas &amp; Tofu</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$90.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Masa fina rellena de setas shiitake frescas, col blanca, zanahoria, tofu ahumado y cebollín con toque de jengibre. Doradas a la plancha con base crujiente y dip de soya con vinagre de arroz.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">6 piezas</span>
-              <span class="badge text-bg-light border small">Tofu &amp; Shiitake</span>
-              <span class="badge text-bg-light border small">Vegetariano</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 8 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Panqueques esponjosos estilo Tokio (2 piezas).</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SECCIÓN 3: DONBURI & CURRY JAPONÉS -->
-  <section id="donburi" class="mb-5 pt-3">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-4">
-      <div>
-        <span class="badge bg-danger-subtle text-danger border border-danger-subtle mb-1">Tazones Calientes sobre Arroz</span>
-        <h2 class="h3 fw-bold mb-0">🍱 Donburi, Curry &amp; Especialidades</h2>
-      </div>
-      <span class="badge text-bg-secondary">4 Opciones</span>
+  <!-- ============================================== -->
+  <!-- SECCIÓN 3: RAMEN (Figma)                      -->
+  <!-- ============================================== -->
+  <section id="ramen" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">RAMEN</h2>
+      <span class="section-count-badge">3 productos</span>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <div class="items-list">
       
-      <!-- Platillo 1: Katsudon -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">Clásico</span>
-            <span class="badge text-bg-light border">Tazón Donburi</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Tonkotsu Ramen Especial</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$165.00</span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Katsudon Tradicional</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$145.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-3">
-              Milanesa de lomo de cerdo empanizada en panko crujiente, guisada a fuego suave en caldo dashi con huevo batido y cebolla caramelizada, servida sobre una cama de arroz gohan al vapor.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 12 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Caldo denso de cerdo 12hrs, chashu, huevo ajitsuke, cebollín y nori.</div>
         </div>
       </div>
 
-      <!-- Platillo 2: Curry Japonés Katsu -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-warning text-dark">Sabor Especiado</span>
-            <span class="badge text-bg-light border">Curry Dulce</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Miso Ramen Picante</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$155.00</span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Curry Japonés con Tonkatsu</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$155.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-3">
-              Espeso y aromático curry estilo japonés con zanahorias y papas tiernas, acompañado de chuleta de cerdo crujiente empanizada en panko y porción generosa de arroz japonés gohan.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 12 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Pasta miso rojo, carne molida especiada, germen de soya y aceite rayu.</div>
         </div>
       </div>
 
-      <!-- Platillo 3: Teriyaki Chicken Don -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-primary text-white">Glaseado Casero</span>
-            <span class="badge text-bg-light border">Pollo Tierno</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Shoyu Ramen Veggie</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$140.00</span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Chicken Teriyaki Don</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$135.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-3">
-              Pechuga de pollo a la plancha caramelizada en salsa teriyaki artesanal a base de mirin y sake, servida con brócoli al vapor, semillas de ajonjolí blanco y cebollín sobre arroz gohan.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 10 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Platillo 4: Yakisoba al Wok -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-secondary text-white">Al Wok</span>
-            <span class="badge text-bg-light border">Fideos Fritos</span>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Yakisoba Salteado Clásico</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$130.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-3">
-              Fideos soba salteados a fuego vivo al wok con col, zanahoria, cebolla, tiras de cerdo o pollo, bañados en salsa agridulce yakisoba, coronados con beni shoga (jengibre rojo) y alga nori.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 10 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Fondo vegetal aromatizado, hongos shiitake, tofu marinado y bambú.</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- SECCIÓN 4: POSTRES JAPONESES -->
-  <section id="postres" class="mb-5 pt-3">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-4">
-      <div>
-        <span class="badge bg-danger-subtle text-danger border border-danger-subtle mb-1">Dulces Típicos</span>
-        <h2 class="h3 fw-bold mb-0">🍡 Postres Japoneses</h2>
-      </div>
-      <span class="badge text-bg-secondary">4 Opciones</span>
+  <!-- ============================================== -->
+  <!-- SECCIÓN 4: ENTRADAS IZAKAYA                   -->
+  <!-- ============================================== -->
+  <section id="izakaya" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">ENTRADAS &amp; IZAKAYA</h2>
+      <span class="section-count-badge">3 productos</span>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-      
-      <!-- Postre 1: Mochi Variado -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">Tradicional</span>
-            <span class="badge text-bg-light border">3 Piezas</span>
+    <div class="items-list">
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Gyozas Japonesas Doradas</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$95.00</span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Trío de Mochis Artesanales</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$75.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-2">
-              Suaves pastelitos elásticos de arroz glutinoso rellenos con helado premium o pasta dulce: 1 de Té Verde Matcha, 1 de Fresa Silvestre y 1 de Chocolate Belga.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">6 empanadillas al vapor y plancha rellenas de cerdo y cebollín con dip ponzu.</div>
         </div>
       </div>
 
-      <!-- Postre 2: Taiyaki -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-warning text-dark">Recién Horneado</span>
-            <span class="badge text-bg-light border">Forma de Pez</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Takoyaki Tradicional de Osaka</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$105.00</span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Taiyaki Crujiente</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$60.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-2">
-              Pastel caliente horneado en molde con forma de pez pargo japonés, con corteza crujiente y relleno generoso a elegir: pasta de frijol rojo dulce (Anko) o Nutella con avellanas.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 6 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">6 esferas de pulpo con salsa takoyaki, mayonesa japonesa y katsuobushi.</div>
         </div>
       </div>
 
-      <!-- Postre 3: Dorayaki -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-primary text-white">Favorito Anime</span>
-            <span class="badge text-bg-light border">2 Piezas</span>
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Edamames al Vapor con Sal de Mar</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$65.00</span>
           </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Dorayaki Relleno Clásico</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$55.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-2">
-              Dos esponjosos panqueques japoneses dorados a la miel tipo castella, rellenos de pasta dulce de anko tradicional o crema pastelera de vainilla.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+          <div class="item-desc">Vainas de soya tiernas al vapor o salteadas con shichimi togarashi.</div>
         </div>
       </div>
-
-      <!-- Postre 4: Helado Matcha -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-success text-white">Matcha de Uji</span>
-            <span class="badge text-bg-light border">Copa</span>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title fw-bold mb-1">Helado de Matcha Japonés</h5>
-            <span class="badge bg-success-subtle text-success border border-success-subtle fs-6 mb-2">$65.00 MXN</span>
-            <p class="card-text text-body-secondary small mb-2">
-              Dos bolas de helado artesanal elaborado con té verde matcha ceremonial importado de Uji, Kioto. Servido con barquillo de galleta y toque de chocolate blanco.
-            </p>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- SECCIÓN 5: BEBIDAS Y TÉS JAPONESES -->
-  <section id="bebidas" class="mb-5 pt-3">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-4">
-      <div>
-        <span class="badge bg-info-subtle text-info border border-info-subtle mb-1">Importadas &amp; Artesanales</span>
-        <h2 class="h3 fw-bold mb-0">🍵 Bebidas &amp; Tés Japoneses</h2>
-      </div>
-      <span class="badge text-bg-secondary">6 Opciones</span>
+  <!-- ============================================== -->
+  <!-- SECCIÓN 5: COMBOS                             -->
+  <!-- ============================================== -->
+  <section id="combos" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">COMBOS Y PAQUETES</h2>
+      <span class="section-count-badge">Especial</span>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      
-      <!-- Bebida 1: Ramune -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-primary text-white">Botella de Canica</span>
-            <span class="badge text-bg-info">Refresco</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Refresco Ramune Original</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$60.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Famoso refresco japonés en su botella clásica de cuello con canica de vidrio Codd. Sabores a elegir: Original Limón-Lima, Fresa, Melón o Mora Azul.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">200 ml</span>
-              <span class="badge text-bg-light border small">Importado de Japón</span>
-              <span class="badge text-bg-light border small">Botella coleccionable</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+    <div class="combos-grid">
+      <div class="combo-box">
+        <div class="combo-box-header">
+          <span class="combo-name">Combo Ramen Maestro</span>
+          <span class="combo-price">$235.00</span>
         </div>
+        <div class="text-muted small">Ahorro de $45 MXN</div>
+        <ul class="combo-items-list">
+          <li>✓ 1 Tazón de Ramen (Tonkotsu o Miso)</li>
+          <li>✓ 1 Orden de Gyozas (4 piezas)</li>
+          <li>✓ 1 Ramune Original a elegir</li>
+        </ul>
       </div>
 
-      <!-- Bebida 2: Calpis / Calpico -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-info text-white">Lácteo Fermentado</span>
-            <span class="badge text-bg-info">Refrescante</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Calpis Frío con Agua Mineral</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$55.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Tradicional bebida japonesa no carbonatada a base de leche cultivada con bacterias lácticas, sabor dulce y ligeramente ácido muy refrescante. Disponible con agua natural o mineralizada y toque de fresa.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">400 ml</span>
-              <span class="badge text-bg-light border small">Natural o Fresa</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
+      <div class="combo-box">
+        <div class="combo-box-header">
+          <span class="combo-name">Dúo Izakaya Snack</span>
+          <span class="combo-price">$240.00</span>
         </div>
+        <div class="text-muted small">Ahorro de $40 MXN</div>
+        <ul class="combo-items-list">
+          <li>✓ 1 Takoyaki Osaka (6 piezas)</li>
+          <li>✓ 1 Edamames o Rollitos Primavera</li>
+          <li>✓ 2 Calpis o Matcha Latte</li>
+        </ul>
       </div>
-
-      <!-- Bebida 3: Té Verde Sencha -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-success text-white">Hojas Sueltas</span>
-            <span class="badge text-bg-light border">Caliente</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Té Verde Sencha de Shizuoka</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$48.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Infusión de hojas enteras de té verde japonés recolectadas en Shizuoka. Notas herbáceas frescas, color verde brillante y suave astringencia que limpia el paladar tras cada bocado.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Tetera 350 ml</span>
-              <span class="badge text-bg-light border small">Antioxidante</span>
-              <span class="badge text-bg-light border small">Reinfusionable</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 4 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bebida 4: Iced Matcha Latte -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-success text-white">Ceremonial Uji</span>
-            <span class="badge text-bg-info">Frío con Leche</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Iced Matcha Latte Japonés</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$70.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Matcha de Kioto batido con batidor de bambú Chasen servido sobre hielo con leche de avena o entera y jarabe ligero de caña.
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">450 ml</span>
-              <span class="badge text-bg-light border small">Leche vegetal incluida</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: 5 min</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bebida 5: Cerveza Japonesa Asahi -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-dark text-white">Cerveza Importada</span>
-            <span class="badge text-bg-light border">Super Dry</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Cerveza Asahi Super Dry</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$85.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              La cerveza más popular de Japón. Estilo lager con final seco, limpio y burbuja fina (estilo Karakuchi). Ideal para acompañar ramen y gyozas calientes (+18 años).
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">330 ml</span>
-              <span class="badge text-bg-light border small">5.0% Alc. Vol.</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bebida 6: Sake Artesanal -->
-      <div class="col">
-        <div class="card h-100 shadow-sm border">
-          <div class="card-header bg-body-tertiary d-flex justify-content-between align-items-center py-2">
-            <span class="badge bg-danger text-white">Tradicional</span>
-            <span class="badge text-bg-light border">Tokkuri 180ml</span>
-          </div>
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-start mb-2">
-              <h5 class="card-title fw-bold mb-0">Sake Junmai de la Casa</h5>
-              <span class="badge bg-success-subtle text-success border border-success-subtle fs-6">$95.00 MXN</span>
-            </div>
-            <p class="card-text text-body-secondary small mb-3">
-              Vino de arroz japonés elaborado con fermentación tradicional. Servido a temperatura ambiente, frío o tibio en jarrita tradicional Tokkuri con dos copitas Ochoko (+18 años).
-            </p>
-            <div class="d-flex flex-wrap gap-1 mb-2">
-              <span class="badge text-bg-light border small">Tokkuri 180 ml</span>
-              <span class="badge text-bg-light border small">Frío o Tibio</span>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-top-0 pt-0 pb-3 d-flex justify-content-between align-items-center">
-            <small class="text-body-secondary">Prep: Inmediato</small>
-            <span class="badge bg-success-subtle text-success">Clic &amp; Recoger</span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- SECCIÓN 6: COMBOS Y BENTO BOXES -->
-  <section id="combos" class="mb-5 pt-3">
-    <div class="d-flex justify-content-between align-items-end border-bottom pb-2 mb-4">
-      <div>
-        <span class="badge bg-warning text-dark mb-1">¡Ahorra en tu Visita!</span>
-        <h2 class="h3 fw-bold mb-0">⭐ Combos Especiales &amp; Bento Boxes</h2>
-      </div>
-      <span class="badge text-bg-warning">Precios con Descuento</span>
-    </div>
-
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      
-      <!-- Combo 1: Combo Ramen Maestro -->
-      <div class="col">
-        <div class="card h-100 border-danger shadow">
-          <div class="card-header bg-danger text-white text-center py-3">
-            <span class="badge bg-white text-danger mb-1">El Más Completo</span>
-            <h4 class="card-title fw-bold mb-0">Combo Ramen Maestro</h4>
-          </div>
-          <div class="card-body text-center p-4">
-            <div class="display-6 fw-bold text-danger mb-2">$235.00 <span class="fs-6 text-body-secondary">MXN</span></div>
-            <p class="text-decoration-line-through text-body-secondary small mb-3">Precio Regular: $320.00</p>
-            <ul class="list-unstyled text-start mb-4">
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>1 Tazón de Ramen a elegir (Tonkotsu o Miso)</span>
-              </li>
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>1 Orden de Gyozas Doradas (4 piezas)</span>
-              </li>
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>1 Refresco Ramune o Té Sencha Caliente</span>
-              </li>
-            </ul>
-          </div>
-          <div class="card-footer bg-body-tertiary text-center p-3">
-            <span class="badge bg-success-subtle text-success fs-6">Ahorras $85.00 MXN</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Combo 2: Combo Dúo Izakaya -->
-      <div class="col">
-        <div class="card h-100 border-warning shadow">
-          <div class="card-header bg-warning text-dark text-center py-3">
-            <span class="badge bg-dark text-white mb-1">Para 2 Jugadores</span>
-            <h4 class="card-title fw-bold mb-0">Dúo Izakaya Snack</h4>
-          </div>
-          <div class="card-body text-center p-4">
-            <div class="display-6 fw-bold text-warning-emphasis mb-2">$240.00 <span class="fs-6 text-body-secondary">MXN</span></div>
-            <p class="text-decoration-line-through text-body-secondary small mb-3">Precio Regular: $310.00</p>
-            <ul class="list-unstyled text-start mb-4">
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>1 Orden de Takoyaki con Pulpo (6 piezas)</span>
-              </li>
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>1 Orden de Rollitos Primavera (4 piezas)</span>
-              </li>
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>2 Bebidas Calpis o Tés Iced Matcha</span>
-              </li>
-            </ul>
-          </div>
-          <div class="card-footer bg-body-tertiary text-center p-3">
-            <span class="badge bg-success-subtle text-success fs-6">Ahorras $70.00 MXN</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Combo 3: Bento Box Ejecutivo -->
-      <div class="col">
-        <div class="card h-100 border-primary shadow">
-          <div class="card-header bg-primary text-white text-center py-3">
-            <span class="badge bg-white text-primary mb-1">Bento Tradicional</span>
-            <h4 class="card-title fw-bold mb-0">Bento Box Petra</h4>
-          </div>
-          <div class="card-body text-center p-4">
-            <div class="display-6 fw-bold text-primary mb-2">$195.00 <span class="fs-6 text-body-secondary">MXN</span></div>
-            <p class="text-decoration-line-through text-body-secondary small mb-3">Precio Regular: $265.00</p>
-            <ul class="list-unstyled text-start mb-4">
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>Pollo Teriyaki o Chuleta Tonkatsu</span>
-              </li>
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>Arroz Gohan + 2 Gyozas + Edamames</span>
-              </li>
-              <li class="d-flex align-items-center gap-2 mb-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
-                <span>1 Té Verde Sencha o Agua Mineral</span>
-              </li>
-            </ul>
-          </div>
-          <div class="card-footer bg-body-tertiary text-center p-3">
-            <span class="badge bg-success-subtle text-success fs-6">Ahorras $70.00 MXN</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Aviso de Alérgenos y Servicio -->
-  <div class="card bg-body-tertiary border shadow-sm">
-    <div class="card-body p-4">
-      <div class="d-flex flex-column flex-md-row gap-3 align-items-start align-items-md-center">
-        <div class="p-3 bg-danger-subtle rounded-circle text-danger">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
-            <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
-            <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
-          </svg>
-        </div>
-        <div>
-          <h5 class="fw-bold mb-1">Información de Alérgenos y Cocina Japonesa</h5>
-          <p class="text-body-secondary small mb-0">
-            Nuestros platillos se elaboran con ingredientes tradicionales que contienen <strong>soya, trigo (gluten), sésamo, huevo, mariscos y pescado (dashi y katsuobushi)</strong>. Si tienes alguna alergia severa o eres vegetariano, indícalo a nuestro equipo o agrega una nota especial al realizar tu orden por <strong>Clic &amp; Recoger</strong> para preparar tu caldo con base 100% vegetal de shiitake y kombu.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- 4. Footer Note from Figma Screen -->
+  <footer class="menu-footer">
+    <p class="fw-semibold mb-1">Cueva de Petra — Cafetería y Coleccionables</p>
+    <p class="mb-0">Precios expresados en moneda nacional (MXN). Menú informativo válido en venta directa y servicio Clic &amp; Recoger.</p>
+  </footer>
 
 </div>
 {% endblock %}
