@@ -1,0 +1,937 @@
+{% extends "layout.html" %}
+
+{% block title %}Gestión de Inventario | Cueva de Petra{% endblock %}
+
+{% block content %}
+<style>
+  :root {
+    --cp-bg: #F8F9FA;
+    --cp-card-bg: #FFFFFF;
+    --cp-border: #E5E7EB;
+    --cp-border-dark: #111111;
+    --cp-text-main: #111111;
+    --cp-text-muted: #6B7280;
+    --cp-accent-yellow: #FACC15;
+    --cp-accent-yellow-hover: #EAB308;
+    --cp-dark-btn: #18181B;
+    --cp-dark-btn-hover: #27272A;
+    --cp-radius: 8px;
+    --cp-radius-sm: 6px;
+  }
+
+  body {
+    background-color: var(--cp-bg);
+    color: var(--cp-text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  /* Layout Wrapper */
+  .admin-layout {
+    display: flex;
+    min-height: calc(100vh - 56px);
+    background-color: var(--cp-bg);
+  }
+
+  /* Sidebar */
+  .admin-sidebar {
+    width: 240px;
+    background: #FFFFFF;
+    border-right: 1px solid var(--cp-border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  .sidebar-header {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--cp-border);
+    text-align: center;
+  }
+
+  .admin-logo-box {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1.5px dashed #9CA3AF;
+    border-radius: var(--cp-radius-sm);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #4B5563;
+    background: #F9FAFB;
+  }
+
+  .sidebar-nav {
+    padding: 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex-grow: 1;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--cp-radius-sm);
+    color: #4B5563;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .sidebar-link:hover {
+    background: #F3F4F6;
+    color: var(--cp-text-main);
+  }
+
+  .sidebar-link.active {
+    background: #111111;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  .sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--cp-border);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.8rem;
+  }
+
+  .avatar-placeholder {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* Main Area */
+  .admin-main {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+
+  /* Page Header */
+  .page-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--cp-text-main);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.2rem;
+  }
+
+  .page-subtitle {
+    color: var(--cp-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  /* Buttons */
+  .btn-admin-primary {
+    background: var(--cp-dark-btn);
+    color: #FFFFFF;
+    border: 1px solid var(--cp-dark-btn);
+    border-radius: var(--cp-radius-sm);
+    padding: 0.55rem 1.1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    text-decoration: none;
+  }
+
+  .btn-admin-primary:hover {
+    background: var(--cp-dark-btn-hover);
+    color: #FFFFFF;
+  }
+
+  /* Stat / KPI Cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .kpi-card {
+    background: var(--cp-card-bg);
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    padding: 1.25rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .kpi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .kpi-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--cp-text-muted);
+    text-transform: uppercase;
+  }
+
+  .kpi-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: #4B5563;
+  }
+
+  .kpi-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--cp-text-main);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .kpi-note {
+    font-size: 0.78rem;
+    color: var(--cp-text-muted);
+  }
+
+  /* Search & Filter Bar */
+  .filters-card {
+    background: var(--cp-card-bg);
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    padding: 0.85rem 1.25rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .search-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1;
+    max-width: 480px;
+  }
+
+  .search-input {
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius-sm);
+    padding: 0.45rem 0.85rem;
+    font-size: 0.875rem;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .search-input:focus {
+    border-color: #111111;
+  }
+
+  .btn-filter-search {
+    background: #F3F4F6;
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius-sm);
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+  }
+
+  .btn-filter-search:hover {
+    background: #E5E7EB;
+  }
+
+  .filter-select {
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius-sm);
+    padding: 0.45rem 0.85rem;
+    font-size: 0.85rem;
+    color: #374151;
+    background: #FFFFFF;
+    outline: none;
+  }
+
+  /* Table Container */
+  .table-card {
+    background: var(--cp-card-bg);
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    text-align: left;
+  }
+
+  .admin-table th {
+    background: #FAFAFA;
+    border-bottom: 1px solid var(--cp-border);
+    padding: 0.75rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--cp-text-muted);
+    text-transform: uppercase;
+  }
+
+  .admin-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--cp-border);
+    vertical-align: middle;
+  }
+
+  .admin-table tr:hover td {
+    background-color: #FAFAFA;
+  }
+
+  .img-cell {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--cp-radius-sm);
+    background: #F3F4F6;
+    border: 1px solid var(--cp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9CA3AF;
+  }
+
+  .item-title {
+    font-weight: 600;
+    color: var(--cp-text-main);
+    margin-bottom: 0.15rem;
+  }
+
+  .item-sku {
+    font-size: 0.75rem;
+    color: var(--cp-text-muted);
+  }
+
+  .badge-category {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--cp-border);
+    background: #FFFFFF;
+    color: #374151;
+  }
+
+  .stock-pill {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: #F3F4F6;
+    color: #111111;
+  }
+
+  .btn-action-outline {
+    background: transparent;
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius-sm);
+    padding: 0.3rem 0.65rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .btn-action-outline:hover {
+    border-color: #111111;
+    color: #111111;
+    background: #FFFFFF;
+  }
+
+  .btn-action-danger {
+    color: #DC2626;
+    border-color: #FCA5A5;
+  }
+
+  .btn-action-danger:hover {
+    background: #FEF2F2;
+    border-color: #DC2626;
+    color: #DC2626;
+  }
+
+  /* Table Footer */
+  .table-footer {
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--cp-text-muted);
+    background: #FFFFFF;
+  }
+
+  .pagination-btns {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .page-btn {
+    border: 1px solid var(--cp-border);
+    background: #FFFFFF;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--cp-radius-sm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #374151;
+  }
+
+  .page-btn.active {
+    background: #111111;
+    color: #FFFFFF;
+    border-color: #111111;
+  }
+
+  /* Modal Styling */
+  .modal-content {
+    border-radius: var(--cp-radius);
+    border: 1px solid var(--cp-border);
+  }
+
+  .modal-header {
+    border-bottom: 1px solid var(--cp-border);
+    padding: 1.1rem 1.5rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+
+  .form-section-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cp-text-muted);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--cp-border);
+    padding-bottom: 0.4rem;
+  }
+</style>
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar d-none d-md-flex">
+    <div class="sidebar-header">
+      <div class="admin-logo-box">
+        [ LOGO ADMIN ]
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M1 4a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4zm9 0a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1V4zm0 6a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-4zM2 11a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-3z" />
+        </svg>
+        Dashboard
+      </a>
+      <a href="#" class="sidebar-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6z" />
+        </svg>
+        Inventario
+      </a>
+      <a href="#" class="sidebar-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path
+            d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z" />
+        </svg>
+        Folios de Apartado
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="avatar-placeholder">AC</div>
+      <div class="overflow-hidden">
+        <div class="fw-semibold text-truncate">Admin Cueva</div>
+        <div class="text-muted small text-truncate">admin@cueva.com</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="admin-main">
+
+    <!-- Page Header -->
+    <div class="page-top-bar">
+      <div>
+        <h1 class="page-title">Gestión de Inventario</h1>
+        <p class="page-subtitle">Administración de stock, precios y catálogo general de figuras y cocina.</p>
+      </div>
+      <div>
+        <button type="button" class="btn-admin-primary" data-bs-toggle="modal" data-bs-target="#modalAltaInventario">
+          + Añadir Figura / Producto
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI / Summary Cards (From Figma) -->
+    <div class="stats-grid">
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">TOTAL FIGURAS</span>
+          <div class="kpi-icon">📦</div>
+        </div>
+        <div class="kpi-value">148</div>
+        <div class="kpi-note">En catálogo registrado</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">FOLIOS ACTIVOS</span>
+          <div class="kpi-icon">📋</div>
+        </div>
+        <div class="kpi-value">27</div>
+        <div class="kpi-note">Apartados pendientes</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">INGRESOS</span>
+          <div class="kpi-icon">💰</div>
+        </div>
+        <div class="kpi-value">$58,450.00</div>
+        <div class="kpi-note">Anticipos y liquidaciones</div>
+      </div>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="filters-card">
+      <div class="search-group">
+        <input type="text" class="search-input" id="tableSearch" placeholder="Buscar por nombre, código SKU...">
+        <button type="button" class="btn-filter-search">Buscar</button>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="small text-muted fw-semibold">Filtrar por:</span>
+        <select class="filter-select" id="filterFranquicia">
+          <option value="">Todas las Franquicias / Categorías</option>
+          <option value="Anime">Anime</option>
+          <option value="Marvel">Marvel</option>
+          <option value="DC Comics">DC Comics</option>
+          <option value="Restaurante">Restaurante / Izakaya</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Data Table (Exact Figma layout) -->
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th style="width: 70px;">ID</th>
+              <th style="width: 80px;">FOTOGRAFÍA</th>
+              <th>NOMBRE</th>
+              <th>FRANQUICIA</th>
+              <th>PRECIO</th>
+              <th>STOCK</th>
+              <th style="width: 150px; text-align: right;">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fw-bold text-muted">#901</td>
+              <td>
+                <div class="img-cell">[FOTO]</div>
+              </td>
+              <td>
+                <div class="item-title">Figura de Acción Coleccionable Escala 1/8</div>
+                <div class="item-sku">SKU: ANM-128</div>
+              </td>
+              <td><span class="badge-category">Anime</span></td>
+              <td class="fw-bold">$1,250.00</td>
+              <td><span class="stock-pill">18</span></td>
+              <td style="text-align: right;">
+                <button class="btn-action-outline me-1">Editar</button>
+                <button class="btn-action-outline btn-action-danger">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="fw-bold text-muted">#902</td>
+              <td>
+                <div class="img-cell">[FOTO]</div>
+              </td>
+              <td>
+                <div class="item-title">Estatua Edición Especial Héroe Armado</div>
+                <div class="item-sku">SKU: MRL-284</div>
+              </td>
+              <td><span class="badge-category">Marvel</span></td>
+              <td class="fw-bold">$2,400.00</td>
+              <td><span class="stock-pill">5</span></td>
+              <td style="text-align: right;">
+                <button class="btn-action-outline me-1">Editar</button>
+                <button class="btn-action-outline btn-action-danger">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="fw-bold text-muted">#903</td>
+              <td>
+                <div class="img-cell">[FOTO]</div>
+              </td>
+              <td>
+                <div class="item-title">Figura Articulada Caballero Oscuro Deluxe</div>
+                <div class="item-sku">SKU: DC-101</div>
+              </td>
+              <td><span class="badge-category">DC Comics</span></td>
+              <td class="fw-bold">$1,890.00</td>
+              <td><span class="stock-pill">8</span></td>
+              <td style="text-align: right;">
+                <button class="btn-action-outline me-1">Editar</button>
+                <button class="btn-action-outline btn-action-danger">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="fw-bold text-muted">#904</td>
+              <td>
+                <div class="img-cell">[FOTO]</div>
+              </td>
+              <td>
+                <div class="item-title">Nendoroid Personaje Mágico con Accesorios</div>
+                <div class="item-sku">SKU: ANM-022</div>
+              </td>
+              <td><span class="badge-category">Anime</span></td>
+              <td class="fw-bold">$950.00</td>
+              <td><span class="stock-pill">12</span></td>
+              <td style="text-align: right;">
+                <button class="btn-action-outline me-1">Editar</button>
+                <button class="btn-action-outline btn-action-danger">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="fw-bold text-muted">#905</td>
+              <td>
+                <div class="img-cell">[FOTO]</div>
+              </td>
+              <td>
+                <div class="item-title">Busto Resina Coleccionista Villano Titán</div>
+                <div class="item-sku">SKU: MRL-045</div>
+              </td>
+              <td><span class="badge-category">Marvel</span></td>
+              <td class="fw-bold">$3,100.00</td>
+              <td><span class="stock-pill">3</span></td>
+              <td style="text-align: right;">
+                <button class="btn-action-outline me-1">Editar</button>
+                <button class="btn-action-outline btn-action-danger">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="fw-bold text-muted">#906</td>
+              <td>
+                <div class="img-cell">[FOTO]</div>
+              </td>
+              <td>
+                <div class="item-title">Figura Metálica Princesa Amazona Guerrera</div>
+                <div class="item-sku">SKU: DC-020</div>
+              </td>
+              <td><span class="badge-category">DC Comics</span></td>
+              <td class="fw-bold">$1,650.00</td>
+              <td><span class="stock-pill">7</span></td>
+              <td style="text-align: right;">
+                <button class="btn-action-outline me-1">Editar</button>
+                <button class="btn-action-outline btn-action-danger">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer & Pagination -->
+      <div class="table-footer">
+        <div>Mostrando <strong>6</strong> de <strong>148</strong> figuras registradas</div>
+        <div class="pagination-btns">
+          <button class="page-btn">« Previo</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">Siguiente »</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ========================================== -->
+<!-- MODAL: ALTA DE PRODUCTO / FIGURA           -->
+<!-- ========================================== -->
+<div class="modal fade" id="modalAltaInventario" tabindex="-1" aria-labelledby="modalAltaInventarioLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title fw-bold" id="modalAltaInventarioLabel">Registrar Nuevo Producto o Platillo</h5>
+          <p class="text-muted small mb-0">Completa los datos técnicos y comerciales para el catálogo general.</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="formAlta" method="POST" enctype="multipart/form-data">
+          <div class="row g-4">
+
+            <!-- Columna Izquierda: Datos Principales -->
+            <div class="col-lg-8">
+
+              <!-- 1. Identificación -->
+              <div class="mb-4">
+                <div class="form-section-title">1. Identificación y Clasificación</div>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label for="nombre" class="form-label small fw-bold">Nombre del Producto / Platillo <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="nombre" name="nombre"
+                      placeholder="Ej. Figura Luffy Gear 5 o Tonkotsu Ramen..." required>
+                  </div>
+                  <div class="col-md-7">
+                    <label for="categoria" class="form-label small fw-bold">Categoría / Franquicia <span
+                        class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <select class="form-select" id="categoria" name="categoria" required>
+                        <option value="" selected disabled>Seleccionar...</option>
+                        <optgroup label="🎎 Coleccionables & Figuras">
+                          <option value="Anime">Anime &amp; Manga</option>
+                          <option value="Marvel">Marvel</option>
+                          <option value="DC Comics">DC Comics</option>
+                          <option value="TCG">TCG (Pokémon, Yu-Gi-Oh!)</option>
+                          <option value="Juegos">Juegos de Mesa</option>
+                        </optgroup>
+                        <optgroup label="🍱 Cafetería & Cocina">
+                          <option value="ramen">Ramen &amp; Fideos</option>
+                          <option value="izakaya">Entradas &amp; Izakaya</option>
+                          <option value="donburi">Donburi &amp; Especialidades</option>
+                          <option value="postres">Postres Japoneses</option>
+                          <option value="bebidas">Bebidas de Importación</option>
+                        </optgroup>
+                      </select>
+                      <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal"
+                        data-bs-target="#modalCategoria">+ Nueva</button>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <label for="sku" class="form-label small fw-bold">Código SKU <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control text-uppercase" id="sku" name="sku" placeholder="ANM-128"
+                      required>
+                  </div>
+                  <div class="col-12">
+                    <label for="descripcion" class="form-label small fw-bold">Descripción General</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" rows="2"
+                      placeholder="Detalles, escala, material, alérgenos o especificaciones..."></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Precios y Existencias -->
+              <div class="mb-4">
+                <div class="form-section-title">2. Precios y Existencias</div>
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label for="precio" class="form-label small fw-bold">Precio de Venta (MXN) <span
+                        class="text-danger">*</span></label>
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input type="number" class="form-control" id="precio" name="precio_venta" step="0.01" min="0"
+                        placeholder="1250.00" required>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="costo" class="form-label small fw-bold">Costo Adquisición</label>
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input type="number" class="form-control" id="costo" name="costo_compra" step="0.01" min="0"
+                        placeholder="750.00">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="descuento" class="form-label small fw-bold">Descuento (%)</label>
+                    <input type="number" class="form-control" id="descuento" name="descuento" min="0" max="100"
+                      placeholder="0">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="stock" class="form-label small fw-bold">Stock Disponible <span
+                        class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="stock" name="stock" min="0" placeholder="10" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="stockMin" class="form-label small fw-bold">Alerta Stock Mínimo</label>
+                    <input type="number" class="form-control" id="stockMin" name="stock_minimo" min="1" value="3">
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Ficha de Cocina (opcional) -->
+              <div>
+                <div class="form-section-title">3. Ficha de Cocina (Solo si aplica a cafetería)</div>
+                <div class="row g-3">
+                  <div class="col-md-4">
+                    <label for="tiempo_prep" class="form-label small fw-semibold">Tiempo Preparación</label>
+                    <div class="input-group">
+                      <input type="number" class="form-control" id="tiempo_prep" name="tiempo_prep" placeholder="10">
+                      <span class="input-group-text">min</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="porcion" class="form-label small fw-semibold">Porción / Piezas</label>
+                    <input type="text" class="form-control" id="porcion" name="porcion"
+                      placeholder="Tazón 750ml, 6 pzs...">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="picante" class="form-label small fw-semibold">Nivel Picante</label>
+                    <select class="form-select" id="picante" name="picante">
+                      <option selected>Sin picante</option>
+                      <option>🌶️ Leve</option>
+                      <option>🌶️🌶️ Medio</option>
+                      <option>🌶️🌶️🌶️ Intenso</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Columna Derecha: Imagen y Switches -->
+            <div class="col-lg-4">
+
+              <!-- Imagen Preview -->
+              <div class="mb-4">
+                <div class="form-section-title">Fotografía</div>
+                <div class="border rounded p-4 text-center bg-light mb-3">
+                  <div style="font-size: 2rem;">📷</div>
+                  <div class="text-muted small">Vista previa de imagen</div>
+                </div>
+                <div class="mb-2">
+                  <label for="imgArchivo" class="form-label small fw-bold">Subir archivo</label>
+                  <input class="form-control form-control-sm" type="file" id="imgArchivo" name="imagen_archivo"
+                    accept="image/*">
+                </div>
+                <div>
+                  <label for="imgUrl" class="form-label small fw-bold">O enlace URL</label>
+                  <input type="url" class="form-control form-control-sm" id="imgUrl" name="imagen_url"
+                    placeholder="https://...">
+                </div>
+              </div>
+
+              <!-- Opciones de Publicación -->
+              <div>
+                <div class="form-section-title">Opciones de Catálogo</div>
+                <div class="d-flex flex-column gap-3">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swPublicar" name="publicar_catalogo" checked>
+                    <label class="form-check-label small fw-semibold" for="swPublicar">Visible en Catálogo /
+                      Menú</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swClicRecoger" name="clic_recoger" checked>
+                    <label class="form-check-label small fw-semibold" for="swClicRecoger">Habilitar Clic &amp;
+                      Recoger</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swDestacado" name="destacar">
+                    <label class="form-check-label small fw-semibold" for="swDestacado">Marcar como Destacado</label>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="formAlta" class="btn btn-dark fw-bold">Guardar en Inventario</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- MODAL: CREAR NUEVA CATEGORÍA               -->
+<!-- ========================================== -->
+<div class="modal fade" id="modalCategoria" tabindex="-1" aria-labelledby="modalCategoriaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="modalCategoriaLabel">Crear Nueva Categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="catNombre" class="form-label small fw-bold">Nombre de la Categoría <span
+              class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="catNombre"
+            placeholder="Ej. Dragon Ball, Gundam, Postres Especiales...">
+        </div>
+        <div class="mb-3">
+          <label for="catModulo" class="form-label small fw-bold">Módulo Asignado</label>
+          <select class="form-select" id="catModulo">
+            <option value="tienda" selected>🎎 Tienda de Coleccionables</option>
+            <option value="restaurante">🍱 Restaurante &amp; Cafetería</option>
+            <option value="mixto">🔄 Ambos módulos</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer bg-light">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-dark fw-bold" data-bs-dismiss="modal">Guardar Categoría</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

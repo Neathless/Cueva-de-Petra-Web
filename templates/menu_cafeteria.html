@@ -1,0 +1,652 @@
+{% extends "layout.html" %}
+
+{% block title %}Menú de Cafetería Asiática | Cueva de Petra{% endblock %}
+
+{% block content %}
+<style>
+  :root {
+    --cp-bg: #FFFFFF;
+    --cp-page-bg: #FAFAFA;
+    --cp-border: #E5E7EB;
+    --cp-border-dark: #111111;
+    --cp-text-main: #111111;
+    --cp-text-muted: #6B7280;
+    --cp-accent: #FACC15;
+    --cp-dark-btn: #18181B;
+    --cp-radius: 8px;
+  }
+
+  body {
+    background-color: var(--cp-page-bg);
+    color: var(--cp-text-main);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .menu-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    min-height: 100vh;
+    border-left: 1px solid var(--cp-border);
+    border-right: 1px solid var(--cp-border);
+    padding: 1.5rem 2rem 3rem 2rem;
+  }
+
+  /* Top Navigation Bar from Figma */
+  .figma-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--cp-border);
+    margin-bottom: 1.5rem;
+  }
+
+  .nav-logo-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border: 1.5px dashed #9CA3AF;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4B5563;
+    background: #F9FAFB;
+    white-space: nowrap;
+  }
+
+  .nav-search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-grow: 1;
+    max-width: 440px;
+  }
+
+  .nav-search-input {
+    width: 100%;
+    border: 1px solid var(--cp-border);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    outline: none;
+  }
+  .nav-search-input:focus {
+    border-color: #111111;
+  }
+
+  .btn-nav-search {
+    background: #111111;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline-pill {
+    border: 1px solid var(--cp-border);
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 0.38rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #111111;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .btn-outline-pill:hover {
+    background: #F3F4F6;
+  }
+
+  /* Hero Card */
+  .menu-hero-card {
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    background: #FAFAFA;
+    margin-bottom: 2rem;
+  }
+
+  .menu-hero-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+    color: var(--cp-text-main);
+  }
+
+  .menu-hero-sub {
+    font-size: 0.875rem;
+    color: var(--cp-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* Quick Category Tabs */
+  .category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cp-border);
+  }
+
+  .tab-pill {
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid var(--cp-border);
+    background: #FFFFFF;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4B5563;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .tab-pill:hover, .tab-pill.active {
+    background: #111111;
+    color: #FFFFFF;
+    border-color: #111111;
+  }
+
+  /* Section Styling */
+  .menu-section {
+    margin-bottom: 2.25rem;
+  }
+
+  .section-header-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1.5px solid #111111;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .section-count-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6B7280;
+    border: 1px solid var(--cp-border);
+    padding: 0.15rem 0.55rem;
+    border-radius: 9999px;
+    background: #F9FAFB;
+  }
+
+  /* Menu Items with Dotted Leader Lines */
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .menu-item-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .item-thumb-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    border: 1px solid var(--cp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #9CA3AF;
+    flex-shrink: 0;
+  }
+
+  .item-info {
+    flex-grow: 1;
+    min-width: 0;
+  }
+
+  .item-title-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .item-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--cp-text-main);
+    white-space: nowrap;
+  }
+
+  .item-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #D1D5DB;
+    height: 1px;
+    margin: 0 0.4rem;
+  }
+
+  .item-price {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--cp-text-main);
+    white-space: nowrap;
+  }
+
+  .item-desc {
+    font-size: 0.78rem;
+    color: var(--cp-text-muted);
+    margin-top: 0.15rem;
+    line-height: 1.4;
+  }
+
+  /* Combos Card Grid */
+  .combos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .combo-box {
+    border: 1px solid var(--cp-border);
+    border-radius: var(--cp-radius);
+    padding: 1.25rem;
+    background: #FFFFFF;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .combo-box:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .combo-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .combo-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .combo-price {
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+
+  .combo-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.75rem 0 0 0;
+    font-size: 0.8rem;
+    color: #4B5563;
+  }
+  .combo-items-list li {
+    padding: 0.2rem 0;
+  }
+
+  /* Footer Note */
+  .menu-footer {
+    border-top: 1px solid var(--cp-border);
+    padding-top: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--cp-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .menu-footer strong {
+    color: var(--cp-text-main);
+  }
+</style>
+
+<div class="menu-wrapper">
+  
+  <!-- 1. Top Navbar from Figma -->
+  <header class="figma-navbar">
+    <div class="nav-logo-box">
+      [ LOGO TIENDA ]
+    </div>
+    
+    <div class="nav-search-box">
+      <input type="text" class="nav-search-input" placeholder="Buscar bebidas, snacks o ramen...">
+      <button type="button" class="btn-nav-search">Buscar</button>
+    </div>
+
+    <div class="nav-actions">
+      <button class="btn-outline-pill">
+        🛒 Carrito <span class="badge bg-dark text-white rounded-pill ms-1">2</span>
+      </button>
+      <button class="btn-outline-pill">
+        Cerrar Sesión
+      </button>
+    </div>
+  </header>
+
+  <!-- 2. Hero Frame from Figma -->
+  <section class="menu-hero-card">
+    <h1 class="menu-hero-title">Menú de Cafetería Asiática</h1>
+    <p class="menu-hero-sub">
+      Selección especial de especialidades, bebidas importadas y gastronomía rápida japonesa y coreana.
+      Pide y recoge en barra o directo a tu mesa de juego.
+    </p>
+  </section>
+
+  <!-- 3. Navigation Categories -->
+  <nav class="category-tabs">
+    <a href="#bebidas" class="tab-pill active">Bebidas de Importación</a>
+    <a href="#snacks" class="tab-pill">Snacks &amp; Botanas</a>
+    <a href="#ramen" class="tab-pill">Ramen &amp; Fideos</a>
+    <a href="#izakaya" class="tab-pill">Entradas Izakaya</a>
+    <a href="#combos" class="tab-pill">Combos Especiales</a>
+  </nav>
+
+  <!-- ============================================== -->
+  <!-- SECCIÓN 1: BEBIDAS DE IMPORTACIÓN (Figma)     -->
+  <!-- ============================================== -->
+  <section id="bebidas" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">BEBIDAS DE IMPORTACIÓN</h2>
+      <span class="section-count-badge">5 productos</span>
+    </div>
+
+    <div class="items-list">
+      
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Ramune Original Japonés</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$65.00</span>
+          </div>
+          <div class="item-desc">Refresco carbonatado con canica tradicional 200ml (Limón-Lima, Fresa, Melón).</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Té Verde Matcha Latte Frío</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$70.00</span>
+          </div>
+          <div class="item-desc">Batido artesanal de té con leche vegetal 350ml.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Calpis Soda de Uva</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$75.00</span>
+          </div>
+          <div class="item-desc">Bebida láctea fermentada refrescante 350ml.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Milkis Coreano Clásico</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$55.00</span>
+          </div>
+          <div class="item-desc">Refresco carbonatado con yogur y dulce 250ml.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Cerveza Asahi Super Dry</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$85.00</span>
+          </div>
+          <div class="item-desc">Lager japonesa tradicional Karakuchi 330ml (+18 años).</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SECCIÓN 2: SNACKS (Figma)                     -->
+  <!-- ============================================== -->
+  <section id="snacks" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">SNACKS</h2>
+      <span class="section-count-badge">4 productos</span>
+    </div>
+
+    <div class="items-list">
+      
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Pocky Chocolate &amp; Almondres</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$45.00</span>
+          </div>
+          <div class="item-desc">Varitas de galleta bañadas en chocolate con trozos de almendra crujiente 45g.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Mochi Tradicional Surtido (3 piezas)</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$90.00</span>
+          </div>
+          <div class="item-desc">Frijol rojo (azuki), taro y té verde.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Onigiri Salmón y Furikake</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$60.00</span>
+          </div>
+          <div class="item-desc">Triángulo de arroz envuelto en alga nori tostada.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Dorayaki Relleno de Nutella y Fresa</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$70.00</span>
+          </div>
+          <div class="item-desc">Panqueques esponjosos estilo Tokio (2 piezas).</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SECCIÓN 3: RAMEN (Figma)                      -->
+  <!-- ============================================== -->
+  <section id="ramen" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">RAMEN</h2>
+      <span class="section-count-badge">3 productos</span>
+    </div>
+
+    <div class="items-list">
+      
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Tonkotsu Ramen Especial</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$165.00</span>
+          </div>
+          <div class="item-desc">Caldo denso de cerdo 12hrs, chashu, huevo ajitsuke, cebollín y nori.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Miso Ramen Picante</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$155.00</span>
+          </div>
+          <div class="item-desc">Pasta miso rojo, carne molida especiada, germen de soya y aceite rayu.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Shoyu Ramen Veggie</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$140.00</span>
+          </div>
+          <div class="item-desc">Fondo vegetal aromatizado, hongos shiitake, tofu marinado y bambú.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SECCIÓN 4: ENTRADAS IZAKAYA                   -->
+  <!-- ============================================== -->
+  <section id="izakaya" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">ENTRADAS &amp; IZAKAYA</h2>
+      <span class="section-count-badge">3 productos</span>
+    </div>
+
+    <div class="items-list">
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Gyozas Japonesas Doradas</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$95.00</span>
+          </div>
+          <div class="item-desc">6 empanadillas al vapor y plancha rellenas de cerdo y cebollín con dip ponzu.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Takoyaki Tradicional de Osaka</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$105.00</span>
+          </div>
+          <div class="item-desc">6 esferas de pulpo con salsa takoyaki, mayonesa japonesa y katsuobushi.</div>
+        </div>
+      </div>
+
+      <div class="menu-item-row">
+        <div class="item-thumb-circle">[FOTO]</div>
+        <div class="item-info">
+          <div class="item-title-line">
+            <span class="item-name">Edamames al Vapor con Sal de Mar</span>
+            <span class="item-dots"></span>
+            <span class="item-price">$65.00</span>
+          </div>
+          <div class="item-desc">Vainas de soya tiernas al vapor o salteadas con shichimi togarashi.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- SECCIÓN 5: COMBOS                             -->
+  <!-- ============================================== -->
+  <section id="combos" class="menu-section">
+    <div class="section-header-box">
+      <h2 class="section-title">COMBOS Y PAQUETES</h2>
+      <span class="section-count-badge">Especial</span>
+    </div>
+
+    <div class="combos-grid">
+      <div class="combo-box">
+        <div class="combo-box-header">
+          <span class="combo-name">Combo Ramen Maestro</span>
+          <span class="combo-price">$235.00</span>
+        </div>
+        <div class="text-muted small">Ahorro de $45 MXN</div>
+        <ul class="combo-items-list">
+          <li>✓ 1 Tazón de Ramen (Tonkotsu o Miso)</li>
+          <li>✓ 1 Orden de Gyozas (4 piezas)</li>
+          <li>✓ 1 Ramune Original a elegir</li>
+        </ul>
+      </div>
+
+      <div class="combo-box">
+        <div class="combo-box-header">
+          <span class="combo-name">Dúo Izakaya Snack</span>
+          <span class="combo-price">$240.00</span>
+        </div>
+        <div class="text-muted small">Ahorro de $40 MXN</div>
+        <ul class="combo-items-list">
+          <li>✓ 1 Takoyaki Osaka (6 piezas)</li>
+          <li>✓ 1 Edamames o Rollitos Primavera</li>
+          <li>✓ 2 Calpis o Matcha Latte</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Footer Note from Figma Screen -->
+  <footer class="menu-footer">
+    <p class="fw-semibold mb-1">Cueva de Petra — Cafetería y Coleccionables</p>
+    <p class="mb-0">Precios expresados en moneda nacional (MXN). Menú informativo válido en venta directa y servicio Clic &amp; Recoger.</p>
+  </footer>
+
+</div>
+{% endblock %}
